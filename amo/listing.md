@@ -7,24 +7,26 @@ Local Bangs
 Instant DuckDuckGo-style !bangs, resolved inside Firefox. Type "!yt lofi" or "!w berlin" in the address bar and go straight to the site – no redirect page, no server, works offline.
 
 ## Description
-Bangs are shortcuts that send a search straight to another site: <b>!yt</b> searches YouTube, <b>!w</b> Wikipedia, <b>!gh</b> GitHub, <b>!a</b> Amazon – over 13,000 of them.
+Bangs are shortcuts that send a search straight to another site: **!yt** searches YouTube, **!w** Wikipedia, **!gh** GitHub, **!a** Amazon – over 13,000 of them.
 
-Normally a bang goes to a search engine first, which then redirects you. <b>Local Bangs resolves them inside Firefox before any request is made</b>, so you land on the target site immediately.
+Normally a bang goes to a search engine first, which then redirects you. **Local Bangs resolves them inside Firefox before any request is made**, so you land on the target site immediately.
 
-<b>How it works</b>
-• Installs a "Local Bangs" search engine – accept the prompt to make it your default
-• Type a bang anywhere in your query: <i>!yt lofi</i>, <i>lofi !yt</i>, <i>!YT lofi</i>
-• A bang on its own (<i>!yt</i>) opens the site's homepage
-• Queries without a bang go to your default engine: Google, DuckDuckGo, Bing, Brave, Kagi, Startpage, Ecosia, Qwant, Mojeek, Perplexity or any custom URL
-• Add your own bangs or override built-in ones on the settings page, with a live "try it" box
-• Also makes <i>unduck.link</i> searches instant if you already use it
+**How it works**
 
-<b>Private by design</b>
-• No data collection, no analytics, no remote server
-• The full bang list ships with the extension – lookups happen locally and work offline
-• If the extension is ever disabled, the search engine falls back to DuckDuckGo, which understands bangs natively
+- Installs a "Local Bangs" search engine – accept the prompt to make it your default
+- Type a bang anywhere in your query: *!yt lofi*, *lofi !yt*, *!YT lofi*
+- A bang on its own (*!yt*) opens the site's homepage
+- Queries without a bang go to your default engine: Google, DuckDuckGo, Bing, Brave, Kagi, Startpage, Ecosia, Qwant, Mojeek, Perplexity or any custom URL
+- Add your own bangs or override built-in ones on the settings page, with a live "try it" box
+- Also makes *unduck.link* searches instant if you already use it
 
-Bang list from DuckDuckGo (duckduckgo.com/bangs). Open source (MIT): https://github.com/tinsever/firefox-bangs
+**Private by design**
+
+- No data collection, no analytics, no remote server
+- The full bang list ships with the extension – lookups happen locally and work offline
+- If the extension is ever disabled, the search engine falls back to DuckDuckGo, which understands bangs natively
+
+Bang list from DuckDuckGo ([duckduckgo.com/bangs](https://duckduckgo.com/bangs)). Open source (MIT): [github.com/tinsever/firefox-bangs](https://github.com/tinsever/firefox-bangs)
 
 ## Category
 Search Tools
