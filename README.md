@@ -1,60 +1,67 @@
+<p align="center"><img src="icons/icon.svg" width="96" alt=""></p>
+
 # Local Bangs
 
-A tiny Firefox extension that resolves DuckDuckGo-style `!bangs` locally.
+Instant DuckDuckGo-style `!bangs`, resolved inside Firefox – no redirect page, no server, works offline.
 
-Set [unduck.link](https://unduck.link) (`https://unduck.link?q=%s`) as your default search engine. The extension
-catches that request before it leaves the browser and redirects straight to the target site, so unduck's page is
-never loaded. All ~13.5k bangs from [DuckDuckGo's bang list](https://duckduckgo.com/bang.js) are bundled, so lookups
-work offline and take about a microsecond.
+Normally a bang goes to a search engine first, which then redirects you. Local Bangs resolves it **before any request
+is made**, so you land on the target site immediately. All ~13.5k bangs from
+[DuckDuckGo's bang list](https://duckduckgo.com/bangs) ship with the extension; a lookup takes about a microsecond.
 
-If the extension is disabled, searches just fall through to the real unduck.link, so searching never breaks.
+## How it works
 
-## Behaviour
+The extension adds a **Local Bangs** search engine (Firefox asks on install whether to make it the default). Its URL
+is `https://duckduckgo.com/?q=…&localbangs=1`; a blocking `webRequest` listener catches only requests carrying that
+marker and redirects to the resolved target. Normal duckduckgo.com browsing is untouched, and if the extension is ever
+disabled, DuckDuckGo still handles the bang itself.
 
-Same rules as unduck:
+Searches to [unduck.link](https://unduck.link) are resolved the same way, so an existing unduck setup becomes instant.
 
-| Query                | Goes to                                             |
-| -------------------- | --------------------------------------------------- |
-| `!yt lofi`           | YouTube search for "lofi"                           |
-| `lofi !yt`           | same – the bang can be anywhere                     |
-| `!YT lofi`           | same – bangs are case-insensitive                   |
-| `!yt`                | youtube.com (bang on its own → site homepage)       |
-| `!gh owner/repo`     | GitHub search, slashes kept readable                |
-| `anything else`      | Google (default, change `DEFAULT_BANG`)             |
-| `!unknownbang foo`   | Google search for "foo"                             |
+| Query              | Goes to                                                |
+| ------------------ | ------------------------------------------------------ |
+| `!yt lofi`         | YouTube search for "lofi"                              |
+| `lofi !yt`         | same – the bang can be anywhere                        |
+| `!YT lofi`         | same – bangs are case-insensitive                      |
+| `!yt`              | youtube.com – a bang on its own opens the homepage     |
+| `!gh owner/repo`   | GitHub search, slashes kept readable                   |
+| `anything else`    | your default engine                                    |
+| `!important css`   | default engine, unchanged – unknown bangs are kept     |
+| `wow!` / `a!b`     | default engine – a bang must start a word              |
 
-## Custom bangs
+## Settings
 
-Add your own (or override existing ones) in `background.js`:
+Open the add-on's preferences (`about:addons` → Local Bangs → Preferences):
 
-```js
-const CUSTOM = {
-  ghr: "https://github.com/{{{s}}}",
-};
-```
+- **Default search engine** for queries without a bang – Google, DuckDuckGo, Bing, Brave, Kagi, Startpage, Ecosia,
+  Qwant, Mojeek, Perplexity, or any URL with `%s`
+- **Custom bangs** – add your own or override built-in ones (e.g. `!ghr` → `https://github.com/%s`)
+- **Try it** – type a query and see where it goes
 
-`{{{s}}}` is replaced with the URL-encoded search terms.
+Settings are stored with `storage.sync`, so they follow your Firefox account.
 
 ## Build
 
 ```sh
-./build.sh   # downloads the latest bang list, regenerates bangs.js, packages local-bangs.zip
+./build.sh            # download the latest bang list, regenerate bangs.js, package local-bangs.zip
+./build.sh --offline  # same, using the existing bangs-ddg.json
 ```
 
-## Install
+`bangs.js` is generated data (committed so the repo can be loaded as-is) – don't edit it by hand.
 
-Firefox Release only installs signed extensions. Sign it as an unlisted (private) add-on with your
+## Install from source
+
+For a quick test, load `manifest.json` via `about:debugging` → *This Firefox* → *Load Temporary Add-on* (removed on
+restart). For a permanent install on Firefox Release, sign it as an unlisted add-on with your
 [AMO API key](https://addons.mozilla.org/developers/addon/api/key/):
 
 ```sh
 WEB_EXT_API_KEY=… WEB_EXT_API_SECRET=… \
   npx web-ext sign --channel=unlisted --source-dir . --artifacts-dir signed \
-  --ignore-files bangs-ddg.json local-bangs.zip build.sh signed
+  --ignore-files bangs-ddg.json local-bangs.zip build.sh signed amo README.md
 ```
 
-Then open the `.xpi` from `signed/` in Firefox. Bump `version` in `manifest.json` before re-signing.
+If you fork this, change the extension id in `manifest.json` – the current one is registered on AMO.
 
-For a quick test without signing, load `manifest.json` via `about:debugging` → *This Firefox* → *Load Temporary Add-on*
-(removed on restart).
+## License
 
-Note: if you fork this, change the extension id in `manifest.json` – the current one is already registered on AMO.
+MIT. The bundled bang list is DuckDuckGo's public bang data and is not covered by this license.

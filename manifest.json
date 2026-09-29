@@ -1,8 +1,15 @@
 {
   "manifest_version": 2,
   "name": "Local Bangs",
-  "version": "1.0.0",
-  "description": "Resolves DuckDuckGo-style !bangs locally. Catches searches to unduck.link and redirects before any request is made.",
+  "version": "1.1.0",
+  "description": "Instant DuckDuckGo-style !bangs, resolved locally inside Firefox – no extra page load, works offline.",
+  "homepage_url": "https://github.com/tinsever/firefox-bangs",
+  "icons": {
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "local-bangs@sevetin.net",
@@ -10,9 +17,29 @@
       "data_collection_permissions": { "required": ["none"] }
     }
   },
-  "permissions": ["webRequest", "webRequestBlocking", "https://unduck.link/*"],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://duckduckgo.com/*",
+    "https://unduck.link/*"
+  ],
   "background": {
-    "scripts": ["bangs.js", "background.js"],
+    "scripts": ["bangs.js", "resolve.js", "background.js"],
     "persistent": true
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Local Bangs",
+      "search_url": "https://duckduckgo.com/?q={searchTerms}&localbangs=1",
+      "suggest_url": "https://duckduckgo.com/ac/?q={searchTerms}&type=list",
+      "favicon_url": "icons/icon-32.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
   }
 }

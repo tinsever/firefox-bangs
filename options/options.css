@@ -1,0 +1,121 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f9f9fb;
+  --surface: #ffffff;
+  --border: #d7d7db;
+  --text: #15141a;
+  --muted: #5b5b66;
+  --accent: #0061e0;
+  --error: #d7264c;
+  --radius: 6px;
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1b22;
+    --surface: #2b2a33;
+    --border: #52525e;
+    --text: #fbfbfe;
+    --muted: #bfbfc9;
+    --accent: #00ddff;
+    --error: #ff848b;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 24px 24px;
+}
+
+header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+h1 { font-size: 22px; margin: 0; }
+h2 { font-size: 15px; margin: 0 0 4px; }
+p { margin: 0 0 10px; }
+
+.muted { color: var(--muted); }
+.error { color: var(--error); margin-top: 6px; }
+
+section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+code {
+  font: 12.5px ui-monospace, "SF Mono", Menlo, monospace;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+a { color: var(--accent); }
+
+input, select, button {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+}
+
+input, select { width: 100%; }
+input:focus-visible, select:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+input[aria-invalid="true"] { border-color: var(--error); }
+
+select + input { margin-top: 8px; }
+
+button { cursor: pointer; }
+button:hover { background: color-mix(in srgb, currentColor 8%, var(--bg)); }
+
+.result {
+  margin: 8px 0 0;
+  word-break: break-all;
+  font: 12.5px ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.custom-row {
+  display: grid;
+  grid-template-columns: auto 120px 1fr auto;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bang-prefix {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.remove { padding: 6px 10px; }
+
+#add-custom { margin-top: 4px; }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+
+#saved { color: var(--accent); }

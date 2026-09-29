@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Local Bangs – Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <img src="../icons/icon.svg" alt="" width="40" height="40">
+      <div>
+        <h1>Local Bangs</h1>
+        <p class="muted">Instant <code>!bangs</code>, resolved inside Firefox.</p>
+      </div>
+    </header>
+
+    <section>
+      <h2>Try it</h2>
+      <input id="test" type="search" placeholder="!yt lofi, !w berlin, !gh mozilla/gecko-dev …" autocomplete="off">
+      <p id="test-result" class="result muted">Type a query to see where it goes.</p>
+    </section>
+
+    <section>
+      <h2>Default search engine</h2>
+      <p class="muted">Used when a query has no bang, or an unknown one.</p>
+      <select id="default-engine"></select>
+      <input id="default-url" type="url" placeholder="https://example.com/search?q=%s" hidden>
+      <p id="default-error" class="error" hidden>The URL needs <code>%s</code> where the search terms go.</p>
+    </section>
+
+    <section>
+      <h2>Custom bangs</h2>
+      <p class="muted">Add your own, or override built-in ones. Use <code>%s</code> for the search terms.</p>
+      <div id="custom-list"></div>
+      <button id="add-custom" type="button">Add bang</button>
+    </section>
+
+    <section>
+      <h2>Setup</h2>
+      <p class="muted">
+        Local Bangs adds a search engine called <strong>Local Bangs</strong>. If you didn't make it your default when
+        installing, pick it under <em>Settings → Search → Default Search Engine</em>.
+        Searches to <code>unduck.link</code> are resolved locally too.
+      </p>
+    </section>
+
+    <footer class="muted">
+      <span id="saved" hidden>Saved</span>
+      <span>Bang list from <a href="https://duckduckgo.com/bangs" target="_blank" rel="noopener">DuckDuckGo</a> · <span id="bang-count"></span> bangs</span>
+    </footer>
+  </main>
+
+  <template id="custom-row">
+    <div class="custom-row">
+      <span class="bang-prefix">!</span>
+      <input class="trigger" type="text" placeholder="trigger" spellcheck="false" autocomplete="off">
+      <input class="url" type="url" placeholder="https://example.com/search?q=%s" spellcheck="false" autocomplete="off">
+      <button class="remove" type="button" title="Remove">✕</button>
+    </div>
+  </template>
+
+  <script src="../bangs.js"></script>
+  <script src="../resolve.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

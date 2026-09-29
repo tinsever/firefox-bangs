@@ -1,0 +1,24 @@
+{
+  "categories": {
+    "firefox": [
+      "search-tools"
+    ]
+  },
+  "summary": {
+    "en-US": "Instant DuckDuckGo-style !bangs, resolved inside Firefox. Type \"!yt lofi\" or \"!w berlin\" in the address bar and go straight to the site – no redirect page, no server, works offline."
+  },
+  "tags": [
+    "search",
+    "duckduckgo",
+    "bangs",
+    "productivity",
+    "privacy"
+  ],
+  "version": {
+    "license": "MIT",
+    "approval_notes": "bangs.js is generated data (DuckDuckGo's public bang list, https://duckduckgo.com/bang.js) converted by build.sh (python3, no dependencies). Reproduce with ./build.sh. The search engine URL carries a localbangs=1 marker; the blocking webRequest listener only redirects main_frame requests with that marker (or to unduck.link), so normal duckduckgo.com use is untouched. No data collection. Source: https://github.com/tinsever/firefox-bangs"
+  },
+  "description": {
+    "en-US": "Bangs are shortcuts that send a search straight to another site: <b>!yt</b> searches YouTube, <b>!w</b> Wikipedia, <b>!gh</b> GitHub, <b>!a</b> Amazon – over 13,000 of them.\n\nNormally a bang goes to a search engine first, which then redirects you. <b>Local Bangs resolves them inside Firefox before any request is made</b>, so you land on the target site immediately.\n\n<b>How it works</b>\n• Installs a \"Local Bangs\" search engine – accept the prompt to make it your default\n• Type a bang anywhere in your query: <i>!yt lofi</i>, <i>lofi !yt</i>, <i>!YT lofi</i>\n• A bang on its own (<i>!yt</i>) opens the site's homepage\n• Queries without a bang go to your default engine: Google, DuckDuckGo, Bing, Brave, Kagi, Startpage, Ecosia, Qwant, Mojeek, Perplexity or any custom URL\n• Add your own bangs or override built-in ones on the settings page, with a live \"try it\" box\n• Also makes <i>unduck.link</i> searches instant if you already use it\n\n<b>Private by design</b>\n• No data collection, no analytics, no remote server\n• The full bang list ships with the extension – lookups happen locally and work offline\n• If the extension is ever disabled, the search engine falls back to DuckDuckGo, which understands bangs natively\n\nBang list from DuckDuckGo (duckduckgo.com/bangs). Open source (MIT): https://github.com/tinsever/firefox-bangs"
+  }
+}

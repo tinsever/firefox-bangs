@@ -1,11 +1,15 @@
 #!/bin/sh
 # Refresh DuckDuckGo's bang list, regenerate bangs.js and package the extension.
+#   ./build.sh            download the latest bang list, then package
+#   ./build.sh --offline  package with the existing bangs-ddg.json
 set -e
 cd "$(dirname "$0")"
 
-curl -fsSL --compressed -o bangs-ddg.json https://duckduckgo.com/bang.js
+if [ "$1" != "--offline" ]; then
+  curl -fsSL --compressed -o bangs-ddg.json https://duckduckgo.com/bang.js
+fi
 
-python3 - <<'EOF'
+python3 - <<'PY'
 import json
 bangs = json.load(open("bangs-ddg.json"))
 table = {b["t"].lower(): [b["u"], b["d"]] for b in bangs}
@@ -15,8 +19,8 @@ with open("bangs.js", "w") as f:
     json.dump(table, f, separators=(",", ":"), ensure_ascii=False)
     f.write(";\n")
 print(f"{len(table)} bangs")
-EOF
+PY
 
 rm -f local-bangs.zip
-zip -q -X local-bangs.zip manifest.json background.js bangs.js
+zip -q -X -r local-bangs.zip manifest.json bangs.js resolve.js background.js options icons LICENSE -x "*.DS_Store"
 echo "packaged local-bangs.zip"
