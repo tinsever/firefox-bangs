@@ -30,7 +30,7 @@ Bang list from DuckDuckGo (duckduckgo.com/bangs). Open source (MIT): https://git
 Search Tools
 
 ## Tags
-search, duckduckgo, bangs, productivity, privacy
+search, privacy
 
 ## License
 MIT
