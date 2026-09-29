@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Local Bangs",
+  "version": "1.0.0",
+  "description": "Resolves DuckDuckGo-style !bangs locally. Catches searches to unduck.link and redirects before any request is made.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "local-bangs@sevetin.net",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
+  "permissions": ["webRequest", "webRequestBlocking", "https://unduck.link/*"],
+  "background": {
+    "scripts": ["bangs.js", "background.js"],
+    "persistent": true
+  }
+}

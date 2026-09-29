@@ -1,0 +1,7 @@
+# build + signing output
+local-bangs.zip
+signed/
+bangs-ddg.json
+.amo-upload-uuid
+web-ext-artifacts/
+.DS_Store
