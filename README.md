@@ -4,6 +4,11 @@
 
 Instant DuckDuckGo-style `!bangs`, resolved inside Firefox – no redirect page, no server, works offline.
 
+**[⬇ Install Local Bangs for Firefox](https://github.com/tinsever/firefox-bangs/releases/latest/download/local-bangs.xpi)**
+– signed by Mozilla; open the link in Firefox and click **Add**, then accept the prompt to make Local Bangs your
+default search engine. (The [addons.mozilla.org listing](https://addons.mozilla.org/firefox/addon/local-bangs/) is
+waiting for Mozilla's review.)
+
 Normally a bang goes to a search engine first, which then redirects you. Local Bangs resolves it **before any request
 is made**, so you land on the target site immediately. All ~13.5k bangs from
 [DuckDuckGo's bang list](https://duckduckgo.com/bangs) ship with the extension; a lookup takes about a microsecond.
